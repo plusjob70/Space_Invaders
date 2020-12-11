@@ -9,6 +9,7 @@ import engine.DrawManager.SpriteType;
 
 /**
  * Implements a ship, to be controlled by the player.
+ *
  * 
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
  * 
