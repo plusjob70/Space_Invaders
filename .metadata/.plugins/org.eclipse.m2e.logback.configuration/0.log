@@ -1,0 +1,3 @@
+2020-12-10 16:03:14,310 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-12-10 16:03:44,637 [Worker-0: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: Invaders-master:Invaders-master:0.0.1-SNAPSHOT @ D:\Document(D2)\Git_PJ\Open_Source\SpaceInvader\7-Invaders-master_2Player\Invaders-master\pom.xml.
+2020-12-10 16:03:45,697 [Worker-10: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: Invaders-master:Invaders-master:0.0.1-SNAPSHOT @ D:\Document(D2)\Git_PJ\Open_Source\SpaceInvader\7-Invaders-master_2Player\Invaders-master\pom.xml.
