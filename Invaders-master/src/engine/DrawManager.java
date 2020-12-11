@@ -249,12 +249,12 @@ public final class DrawManager {
 
 	public void drawScore2(final Screen screen, final int score1, final int score2){
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.GREEN);
 		String score1String = String.format("%04d", score1);
 		backBufferGraphics.drawString(score1String, screen.getWidth() -100, 25);
 
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.RED);
 		String score2String = String.format("%04d", score2);
 		backBufferGraphics.drawString(score2String, screen.getWidth() - 50, 25);
 	}
@@ -271,7 +271,7 @@ public final class DrawManager {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
 		backBufferGraphics.drawString(Integer.toString(lives), 20, 25);
-		Ship dummyShip = new Ship(0, 0);
+		Ship dummyShip = new Ship(0, 0, Color.WHITE);
 		for (int i = 0; i < lives; i++)
 			drawEntity(dummyShip, 40 + 35 * i, 10);
 	}
@@ -279,17 +279,17 @@ public final class DrawManager {
 	public void drawLives2(final Screen screen, final int lives1, final int lives2) {
 		//Player1
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.GREEN);
 		backBufferGraphics.drawString(Integer.toString(lives1), 15, 20); //15, 20
-		Ship dummyShip1 = new Ship(0, 0);
+		Ship dummyShip1 = new Ship(0, 0, Color.GREEN);
 		for (int i = 0; i < lives1; i++)
 			drawEntity(dummyShip1, 40 + 35 * i, 10); //40+35 , 10
 
 		//Player2
 		backBufferGraphics.setFont(fontRegular);
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.RED);
 		backBufferGraphics.drawString(Integer.toString(lives2), 150, 20); // 150, 20
-		Ship dummyShip2 = new Ship(0, 0);
+		Ship dummyShip2 = new Ship(0, 0, Color.RED);
 		for (int i = 0; i < lives2; i++)
 			drawEntity(dummyShip2, 175 + 35 * i, 10); // 175+35, 10
 	}
@@ -412,7 +412,7 @@ public final class DrawManager {
 		int height = isNewRecord ? 4 : 2;
 		height = isNewRecord2? 4 : 2;
 
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredRegularStringPlayer1(screen, scoreString, screen.getHeight()
 				/ height, fontSmall);
 		drawCenteredRegularStringPlayer1(screen, livesRemainingString,
@@ -425,7 +425,7 @@ public final class DrawManager {
 				/ height + fontRegularMetrics.getHeight() * 6, fontSmall);
 
 				
-		backBufferGraphics.setColor(Color.WHITE);
+		backBufferGraphics.setColor(Color.RED);
 		drawCenteredRegularStringPlayer2(screen, scoreString2, screen.getHeight()	/ height, fontSmall);
 		drawCenteredRegularStringPlayer2(screen, livesRemainingString2,screen.getHeight() / height + fontRegularMetrics.getHeight()* 2, fontSmall);
 		drawCenteredRegularStringPlayer2(screen, shipsDestroyedString2, screen.getHeight()	/ height + fontRegularMetrics.getHeight()* 4, fontSmall);
@@ -486,7 +486,7 @@ public final class DrawManager {
 				}
 
 		if(isNewRecord2){
-			backBufferGraphics.setColor(Color.GREEN);
+			backBufferGraphics.setColor(Color.RED);
 			int positionX = (screen.getWidth()
 			/ 4)*3
 			- (fontRegularMetrics.getWidths()[name2[0]]
@@ -496,7 +496,7 @@ public final class DrawManager {
 
 	for (int i = 0; i < 3; i++) {
 		if (i == nameCharSelected2)
-			backBufferGraphics.setColor(Color.GREEN);
+			backBufferGraphics.setColor(Color.RED);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 
