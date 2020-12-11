@@ -577,13 +577,23 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.WHITE);
 		int i = 0;
 		String scoreString = "";
+		String Player1 = "Player1";
+		String Player2 = "Player2";
+		drawCenteredRegularStringHighScore1(screen, Player1, screen.getHeight()/ 4 + fontRegularMetrics.getHeight() * (i + 1) * 2, fontRegular);
+		drawCenteredRegularStringHighScore2(screen, Player2, screen.getHeight()/ 4 + fontRegularMetrics.getHeight() * (i + 1) * 2, fontRegular);
 
 		for (Score score : highScores) {
-			scoreString = String.format("%s        %04d", score.getName(),
-					score.getScore());
-			drawCenteredRegularString(screen, scoreString, screen.getHeight()
-					/ 4 + fontRegularMetrics.getHeight() * (i + 1) * 2);
 			i++;
+			if(i%2 !=0){
+				scoreString = String.format("%s        %04d", score.getName(), score.getScore());
+				drawCenteredRegularStringHighScore1(screen, scoreString, screen.getHeight()/ 4
+				+ fontRegularMetrics.getHeight() * (i + 1) * 2, fontRegular);
+			}
+			else{
+				scoreString = String.format("%s        %04d", score.getName(), score.getScore());
+				drawCenteredRegularStringHighScore2(screen, scoreString, screen.getHeight()/ 4
+				+ fontRegularMetrics.getHeight() * (i ) * 2, fontRegular);
+			}
 		}
 	}
 

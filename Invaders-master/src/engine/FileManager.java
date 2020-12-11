@@ -174,7 +174,9 @@ public final class FileManager {
 	 * @throws IOException
 	 *             In case of loading problems.
 	 * 
+	 * ?????? name Score ????? ?? ??????? 1??? ????? 1, 2 ?��????? ????
 	 */
+	//FOR 2PLAYER FILE
 	public List<Score> loadHighScores() throws IOException {
 		
 		List<Score> highScores = new ArrayList<Score>();
@@ -198,13 +200,20 @@ public final class FileManager {
 			logger.info("Loading user high scores.");
 
 			Score Player1Score = null;
+			Score Player2Score = null;
 			String player1 = bufferedReader.readLine();
+			String player2 = bufferedReader.readLine();
 
-			while ((player1 != null)) {
+			while ((player1 != null) && (player2 != null)) {
 				String[] split = player1.split("@");
 				Player1Score = new Score(split[0], Integer.parseInt(split[1]));
 				highScores.add(Player1Score);
+
+				split = player2.split("@");
+				Player2Score = new Score(split[0], Integer.parseInt(split[1]));
+				highScores.add(Player2Score);
 				player1 = bufferedReader.readLine();
+				player2 = bufferedReader.readLine();
 			}
 
 		} catch (FileNotFoundException e) {
