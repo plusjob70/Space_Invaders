@@ -5,19 +5,13 @@ import java.awt.event.KeyEvent;
 import engine.Cooldown;
 import engine.Core;
 
-/**
- * Implements the title screen.
- * 
- * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
- */
-public class TitleScreen extends Screen {
-
-	/** Milliseconds between changes in user selection. */
+public class DifficultyScreen extends Screen{
+    
+    /** Milliseconds between changes in user selection. */
 	private static final int SELECTION_TIME = 200;
 	
 	/** Time between changes in user selection. */
-	private Cooldown selectionCooldown;
+    private Cooldown selectionCooldown;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -29,25 +23,24 @@ public class TitleScreen extends Screen {
 	 * @param fps
 	 *            Frames per second, frame rate at which the game is run.
 	 */
-	public TitleScreen(final int width, final int height, final int fps, int difficultyCode) {
+	public DifficultyScreen(final int width, final int height, final int fps, int difficultyCode) {
 		super(width, height, fps);
 
 		// Defaults to play.
-		this.returnCode = 2;
+        this.returnCode = 1;
+        this.difficultyCode = difficultyCode;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
-		this.difficultyCode = difficultyCode;
-
-	}
-
-	/**
+    }
+    
+    	/**
 	 * Starts the action.
 	 * 
 	 * @return Next screen code.
 	 */
 	public final int run() {
 		super.run();
-		
+
 		return this.returnCode;
 	}
 
@@ -70,36 +63,38 @@ public class TitleScreen extends Screen {
 				nextMenuItem();
 				this.selectionCooldown.reset();
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
-			{
-
+			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
 				this.isRunning = false;
 			}
 		}
-	}
+    }
+    
+    /**
+     * @return Return DifficultCode.
+     */
+    public int getDifficultyCode()
+    {
+        return this.difficultyCode; 
+    }
 
 	/**
 	 * Shifts the focus to the next menu item.
 	 */
 	private void nextMenuItem() {
-		if (this.returnCode == 4)
-			this.returnCode = 0;
-		else if (this.returnCode == 0)
-			this.returnCode = 2;
+        if (this.difficultyCode == 2)
+			this.difficultyCode = 0;
 		else
-			this.returnCode++;
+			this.difficultyCode++;
 	}
 
 	/**
 	 * Shifts the focus to the previous menu item.
 	 */
 	private void previousMenuItem() {
-		if (this.returnCode == 0)
-			this.returnCode = 4;
-		else if (this.returnCode == 2)
-			this.returnCode = 0;
+		if (this.difficultyCode == 0)
+			this.difficultyCode = 2;
 		else
-			this.returnCode--;
+			this.difficultyCode--;
 	}
 
 	/**
@@ -108,8 +103,8 @@ public class TitleScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
-		drawManager.drawTitle(this, this.difficultyCode);
-		drawManager.drawMenu(this, this.returnCode);
+		drawManager.drawDifficultyTitle(this);
+		drawManager.drawDifficultyMenu(this, this.difficultyCode);
 
 		drawManager.completeDrawing(this);
 	}

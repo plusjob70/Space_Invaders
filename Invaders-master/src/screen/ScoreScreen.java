@@ -69,7 +69,7 @@ public class ScoreScreen extends Screen {
 	 *            Current game state.
 	 */
 	public ScoreScreen(final int width, final int height, final int fps,
-			final GameState gameState) {
+			final GameState gameState, int difficultyCode) {
 		super(width, height, fps);
 
 		this.score = gameState.getScore();
@@ -81,9 +81,10 @@ public class ScoreScreen extends Screen {
 		this.nameCharSelected = 0;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
+		this.difficultyCode = difficultyCode;
 
 		try {
-			this.highScores = Core.getFileManager().loadHighScores();
+			this.highScores = Core.getFileManager().loadHighScores(this.difficultyCode);
 			if (highScores.size() < MAX_HIGH_SCORE_NUM
 					|| highScores.get(highScores.size() - 1).getScore()
 					< this.score)
@@ -108,7 +109,7 @@ public class ScoreScreen extends Screen {
 	 *            Current game state2.
 	 */
 	public ScoreScreen(final int width, final int height, final int fps,
-	final GameState2 gameState) {
+	final GameState2 gameState, int difficultyCode) {
 super(width, height, fps);
 
 this.score = gameState.getScore1();
@@ -127,9 +128,10 @@ this.nameCharSelected = 0;
 this.nameCharSelected2 = 0;
 this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 this.selectionCooldown.reset();
+this.difficultyCode = difficultyCode;
 
 try {
-	this.highScores = Core.getFileManager().loadHighScores();
+	this.highScores = Core.getFileManager().loadHighScores(this.difficultyCode);
 	if (highScores.size()  < MAX_HIGH_SCORE_NUM
 			|| highScores.get(highScores.size() - 2).getScore()
 			< this.score)
@@ -142,7 +144,7 @@ try {
 //FOR 2PLAYER FILE
 //Player2 Socre가 high Socre인지 확인
 try {
-	this.highScores = Core.getFileManager().loadHighScores();
+	this.highScores = Core.getFileManager().loadHighScores(this.difficultyCode);
 	if (highScores.size() < MAX_HIGH_SCORE_NUM
 			|| highScores.get(highScores.size() - 1).getScore()
 			< this.score2)
@@ -285,7 +287,7 @@ try {
 		}//뒤에 2개 삭제
 
 		try {
-			Core.getFileManager().saveHighScores(highScores);
+			Core.getFileManager().saveHighScores(highScores, this.difficultyCode);
 		} catch (IOException e) {
 			logger.warning("Couldn't load high scores!");
 		}
