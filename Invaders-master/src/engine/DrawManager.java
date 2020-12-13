@@ -46,6 +46,8 @@ public final class DrawManager {
 	private static FontMetrics fontRegularMetrics;
 	/** Big sized font.(24p) */
 	private static Font fontBig;
+	/** Huge sized font(48p) */
+	private static Font fontHuge;
 	/** Big sized font properties. */
 	private static FontMetrics fontBigMetrics;
 
@@ -703,4 +705,14 @@ backBufferGraphics.drawString(string, (screen.getWidth() / 6)*4 +20
 					+ fontBigMetrics.getHeight() / 3);
 	}
 
+
+
+	public void drawESC(final Screen screen) {
+		String pause = "PAUSE";
+		
+		backBufferGraphics.setFont(fontHuge);
+		backBufferGraphics.setColor(Color.YELLOW);
+		drawCenteredBigString(screen, pause,  screen.getHeight() / 2
+		+ fontBigMetrics.getHeight() / 3);
+	 }
 }
