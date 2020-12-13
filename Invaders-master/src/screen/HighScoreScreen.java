@@ -63,6 +63,24 @@ public class HighScoreScreen extends Screen {
 
                 this.isRunning = false;
             }
+            //Reset
+            if (inputManager.isKeyDown(KeyEvent.VK_R)) {
+
+                ResetHighScoreScreen();
+                inputDelay.reset();
+            }
+        }
+    }
+    /**
+     * Restart HighScoreScreen & Reset High Scores.
+     */
+    public void ResetHighScoreScreen()
+    {
+        try {
+            Core.getFileManager().resetHighScores();
+            this.highScores = Core.getFileManager().loadHighScores();
+        } catch (NumberFormatException | IOException e) {
+            logger.warning("Couldn't load high scores!");
         }
     }
 

@@ -281,5 +281,31 @@ public final class FileManager {
 		}
 	}
 	
+	/**
+     * Reset user high scores to disk.
+     * This contain score savePath
+	 * 
+     * @throws IOException
+     *             In case of loading problems.
+     */
+    public void resetHighScores() 
+            throws IOException {
+        try {
+            String jarPath = FileManager.class.getProtectionDomain()
+                    .getCodeSource().getLocation().getPath();
+            jarPath = URLDecoder.decode(jarPath, "UTF-8");
+            String scoresPath = new File(jarPath).getParent();
+            scoresPath += File.separator;
+            scoresPath += "src/scores";
+            File scoresFile = new File(scoresPath);
+            scoresFile.delete();
+            if (!scoresFile.exists())
+                scoresFile.createNewFile();
+            logger.info("Complete Reset user high scores.");
+        } finally
+        {
+        }
+	}
+	
 }
 
