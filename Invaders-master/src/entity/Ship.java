@@ -93,6 +93,7 @@ public class Ship extends Entity {
 	 * Switches the ship to its destroyed state.
 	 */
 	public final void destroy() {
+
 		this.destructionCooldown.reset();
 	}
 

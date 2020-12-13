@@ -88,7 +88,7 @@ public class GameScreen_2 extends Screen {
 	private boolean ship2End;
 	/** If the screen is stop */
 	protected boolean isStop = false;
-
+	
 
 	/**
 	 * Constructor, establishes the properties of the screen.

@@ -8,6 +8,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import screen.DifficultyScreen;
 // import screen.GameScreen;
 import screen.GameScreen_2;
 import screen.HighScoreScreen;
@@ -36,29 +37,75 @@ public final class Core {
 	private static final int EXTRA_LIFE_FRECUENCY = 3;
 	/** Total number of levels. */
 	private static final int NUM_LEVELS = 7;
+	
+	// Easy GameSettings
+	/** Easy Difficulty settings for level 1. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_1 =
+			new GameSettings(2, 2, 30, 3500);
+	/** Easy Difficulty settings for level 2. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_2 =
+			new GameSettings(4, 4, 30, 3000);
+	/** Easy Difficulty settings for level 3. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_3 =
+			new GameSettings(4, 5, 40, 2500);
+	/** Easy Difficulty settings for level 4. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_4 =
+			new GameSettings(6, 6, 20, 2000);
+	/** Easy Difficulty settings for level 5. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_5 =
+			new GameSettings(6, 6, 40, 1500);
+	/** Easy Difficulty settings for level 6. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_6 =
+			new GameSettings(7, 7, 10, 1500);
+	/** Easy Difficulty settings for level 7. */
+	private static final GameSettings EASY_SETTINGS_LEVEL_7 =
+			new GameSettings(8, 7, 2, 1000);
 
-	// GameSettings
-	/** Difficulty settings for level 1. */
-	private static final GameSettings SETTINGS_LEVEL_1 =
+	// Nomal GameSettings
+	/** Nomal Difficulty settings for level 1. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_1 =
 			new GameSettings(5, 4, 60, 2000);
-	/** Difficulty settings for level 2. */
-	private static final GameSettings SETTINGS_LEVEL_2 =
+	/** Nomal Difficulty settings for level 2. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_2 =
 			new GameSettings(5, 5, 50, 2500);
-	/** Difficulty settings for level 3. */
-	private static final GameSettings SETTINGS_LEVEL_3 =
+	/** Nomal Difficulty settings for level 3. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_3 =
 			new GameSettings(6, 5, 40, 1500);
-	/** Difficulty settings for level 4. */
-	private static final GameSettings SETTINGS_LEVEL_4 =
+	/** Nomal Difficulty settings for level 4. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_4 =
 			new GameSettings(6, 6, 30, 1500);
-	/** Difficulty settings for level 5. */
-	private static final GameSettings SETTINGS_LEVEL_5 =
+	/** Nomal Difficulty settings for level 5. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_5 =
 			new GameSettings(7, 6, 20, 1000);
-	/** Difficulty settings for level 6. */
-	private static final GameSettings SETTINGS_LEVEL_6 =
+	/** Nomal Difficulty settings for level 6. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_6 =
 			new GameSettings(7, 7, 10, 1000);
-	/** Difficulty settings for level 7. */
-	private static final GameSettings SETTINGS_LEVEL_7 =
+	/** Nomal Difficulty settings for level 7. */
+	private static final GameSettings NOMAL_SETTINGS_LEVEL_7 =
 			new GameSettings(8, 7, 2, 500);
+
+	// Hard GameSettings
+	/** Hard Difficulty settings for level 1. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_1 =
+			new GameSettings(5, 5, 65, 2000);
+	/** Hard Difficulty settings for level 2. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_2 =
+			new GameSettings(5, 5, 55, 2000);
+	/** Hard Difficulty settings for level 3. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_3 =
+			new GameSettings(6, 5, 45, 1000);
+	/** Hard Difficulty settings for level 4. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_4 =
+			new GameSettings(6, 6, 35, 1000);
+	/** Hard Difficulty settings for level 5. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_5 =
+			new GameSettings(7, 6, 25, 500);
+	/** Hard Difficulty settings for level 6. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_6 =
+			new GameSettings(7, 7, 15, 500);
+	/** Hard Difficulty settings for level 7. */
+	private static final GameSettings HARD_SETTINGS_LEVEL_7 =
+			new GameSettings(8, 7, 5, 50);		
 	
 	/** Frame to draw the screen on. */
 	private static Frame frame;
@@ -66,6 +113,12 @@ public final class Core {
 	private static Screen currentScreen;
 	/** Current Difficulty settings list. */
 	private static List<GameSettings> gameSettings;
+	/** Easy Difficulty settings list. */
+	private static List<GameSettings> easy_GameSettings;
+	/** Nomal Difficulty settings list. */
+	private static List<GameSettings> nomal_GameSettings;
+	/** Hard Difficulty settings list. */
+	private static List<GameSettings> hard_GameSettings;
 	/** Application logger. */
 	private static final Logger LOGGER = Logger.getLogger(Core.class
 			.getSimpleName());
@@ -105,19 +158,39 @@ public final class Core {
 		int width = frame.getWidth();
 		int height = frame.getHeight();
 
+		// Init Easy GameSettings.
+		easy_GameSettings = new ArrayList<GameSettings>();
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_1);
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_2);
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_3);
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_4);
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_5);
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_6);
+		easy_GameSettings.add(EASY_SETTINGS_LEVEL_7);
 
+		// Init Nomal GameSettings.
+		nomal_GameSettings = new ArrayList<GameSettings>();
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_1);
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_2);
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_3);
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_4);
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_5);
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_6);
+		nomal_GameSettings.add(NOMAL_SETTINGS_LEVEL_7);
 
-		// Init GameSettings.
-		gameSettings = new ArrayList<GameSettings>();
-		gameSettings.add(SETTINGS_LEVEL_1);
-		gameSettings.add(SETTINGS_LEVEL_2);
-		gameSettings.add(SETTINGS_LEVEL_3);
-		gameSettings.add(SETTINGS_LEVEL_4);
-		gameSettings.add(SETTINGS_LEVEL_5);
-		gameSettings.add(SETTINGS_LEVEL_6);
-		gameSettings.add(SETTINGS_LEVEL_7);
+		// Init Hard GameSettings.
+		hard_GameSettings = new ArrayList<GameSettings>();
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_1);
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_2);
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_3);
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_4);
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_5);
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_6);
+		hard_GameSettings.add(HARD_SETTINGS_LEVEL_7);
 
-
+		// Init Current GameSettings. (Default Value : Nomal Difficult)
+		gameSettings = nomal_GameSettings;
+		int difficultyCode = 1;
 		
 		GameState2 gameState;
 
@@ -128,7 +201,7 @@ public final class Core {
 			switch (returnCode) {
 			case 1:
 				// Main menu.
-				currentScreen = new TitleScreen(width, height, FPS);
+				currentScreen = new TitleScreen(width, height, FPS, difficultyCode);
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " title screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
@@ -172,17 +245,42 @@ public final class Core {
 						+ gameState.getLivesRemaining1() + " lives remaining, "
 						+ gameState.getBulletsShot1() + " bullets shot and "
 						+ gameState.getShipsDestroyed1() + " ships destroyed.");
-				currentScreen = new ScoreScreen(width, height, FPS, gameState);
+				currentScreen = new ScoreScreen(width, height, FPS, gameState, difficultyCode);
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing score screen.");
 				break;
 			case 3:
 				// High scores.
-				currentScreen = new HighScoreScreen(width, height, FPS);
+				currentScreen = new HighScoreScreen(width, height, FPS, difficultyCode);
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " high score screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing high score screen.");
+				break;
+			case 4:
+				// Game Difficulty Setting.
+				DifficultyScreen difScreen = new DifficultyScreen(width, height, FPS, difficultyCode);
+				currentScreen = difScreen;
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " high score screen at " + FPS + " fps,"
+						+ "with a difficultyCode is " + difficultyCode + ".");
+				returnCode = frame.setScreen(currentScreen);
+				difficultyCode = difScreen.getDifficultyCode();
+				switch (difficultyCode) {
+					case 0:
+						gameSettings = easy_GameSettings;
+						break;
+					case 1:
+						gameSettings = nomal_GameSettings;
+						break;
+					case 2:
+						gameSettings = hard_GameSettings;
+						break;
+					default :
+						LOGGER.warning("I don't know this diffiucltyCode");
+				}
+				LOGGER.info("Change difficultyCode to " + difficultyCode + "."
+					+ "Closing diffiuclty screen.");
 				break;
 			default:
 				break;
@@ -237,7 +335,7 @@ public final class Core {
 	public static FileManager getFileManager() {
 		return FileManager.getInstance();
 	}
-	
+
 
 	/**
 	 * Controls creation of new cooldowns.

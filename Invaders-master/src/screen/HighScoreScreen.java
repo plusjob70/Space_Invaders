@@ -28,14 +28,15 @@ public class HighScoreScreen extends Screen {
 	 * @param fps
 	 *            Frames per second, frame rate at which the game is run.
 	 */
-	public HighScoreScreen(final int width, final int height, final int fps) {
+	public HighScoreScreen(final int width, final int height, final int fps, int difficultyCode) {
 		super(width, height, fps);
 
 		this.returnCode = 1;
+		this.difficultyCode = difficultyCode;
 		
 
 		try {
-			this.highScores = Core.getFileManager().loadHighScores();
+			this.highScores = Core.getFileManager().loadHighScores(this.difficultyCode);
 		} catch (NumberFormatException | IOException e) {
 			logger.warning("Couldn't load high scores!");
 		}
@@ -77,8 +78,8 @@ public class HighScoreScreen extends Screen {
     public void ResetHighScoreScreen()
     {
         try {
-            Core.getFileManager().resetHighScores();
-            this.highScores = Core.getFileManager().loadHighScores();
+            Core.getFileManager().resetHighScores(this.difficultyCode);
+            this.highScores = Core.getFileManager().loadHighScores(this.difficultyCode);
         } catch (NumberFormatException | IOException e) {
             logger.warning("Couldn't load high scores!");
         }

@@ -42,6 +42,8 @@ public class Screen {
 	protected boolean isRunning;
 	/** What kind of screen goes next. */
 	protected int returnCode;
+	/** Game Difficult Code */
+	protected int difficultyCode;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
