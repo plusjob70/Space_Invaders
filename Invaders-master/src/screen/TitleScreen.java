@@ -40,10 +40,11 @@ public class TitleScreen extends Screen {
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
 		this.difficultyCode = difficultyCode;
-	
+
 		this.soundManager = Core.getSoundManager();
 		this.soundManager.ChangeBGM("title");
 		this.soundManager.BGMControler(1);
+
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class TitleScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 			{
-				logger.info("Å¬¸¯");
+				logger.info("Å¬ï¿½ï¿½");
 				this.soundManager.ChangeSFX("click");
 				this.soundManager.SFXControler(1);
 

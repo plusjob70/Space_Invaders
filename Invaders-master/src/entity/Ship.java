@@ -99,8 +99,10 @@ public class Ship extends Entity {
 	 * Switches the ship to its destroyed state.
 	 */
 	public final void destroy() {
+
 		this.soundManager.ChangeSFX("shipDead");
 		this.soundManager.SFXControler(1);
+
 		this.destructionCooldown.reset();
 	}
 

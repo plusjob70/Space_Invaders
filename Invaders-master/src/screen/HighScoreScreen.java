@@ -36,7 +36,9 @@ public class HighScoreScreen extends Screen {
 
 		this.returnCode = 1;
 		this.difficultyCode = difficultyCode;
+
 		this.soundManager = Core.getSoundManager();
+
 		
 
 		try {

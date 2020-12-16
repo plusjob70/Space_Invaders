@@ -335,6 +335,7 @@ public final class Core {
 	public static FileManager getFileManager() {
 		return FileManager.getInstance();
 	}
+
 	
 	/**
 	 * Controls access to the sound manager.
