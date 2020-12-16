@@ -38,11 +38,8 @@ public class DifficultyScreen extends Screen{
         this.difficultyCode = difficultyCode;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
-<<<<<<< HEAD
 		
 		this.soundManager = Core.getSoundManager();
-=======
->>>>>>> origin_master/master
     }
     
     	/**
@@ -76,11 +73,8 @@ public class DifficultyScreen extends Screen{
 				this.selectionCooldown.reset();
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
-<<<<<<< HEAD
 				this.soundManager.ChangeSFX("click");
 				this.soundManager.SFXControler(1);
-=======
->>>>>>> origin_master/master
 				this.isRunning = false;
 			}
 		}
