@@ -136,14 +136,14 @@ public final class FileManager {
 	 * @throws IOException
 	 *             In case of loading problems.
 	 */
-	private List<Score> loadDefaultHighScores() throws IOException {
+	private List<Score> loadDefaultHighScores(int difficultyCode) throws IOException {
 		List<Score> highScores = new ArrayList<Score>();
 		InputStream inputStream = null;
 		BufferedReader reader = null;
 
 		try {
 			inputStream = FileManager.class.getClassLoader()
-					.getResourceAsStream("scores");
+					.getResourceAsStream("scores_base");
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 
 			Score highScore = null;
@@ -174,10 +174,10 @@ public final class FileManager {
 	 * @throws IOException
 	 *             In case of loading problems.
 	 * 
-	 * ?????? name Score ????? ?? ??????? 1??? ????? 1, 2 ?ï¿½ï¿½????? ????
+	 * ?????? name Score ????? ?? ??????? 1??? ????? 1, 2 ?¡À????? ????
 	 */
 	//FOR 2PLAYER FILE
-	public List<Score> loadHighScores() throws IOException {
+	public List<Score> loadHighScores(int difficultyCode) throws IOException {
 		
 		List<Score> highScores = new ArrayList<Score>();
 		InputStream inputStream = null;
@@ -190,7 +190,7 @@ public final class FileManager {
 
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
-			scoresPath += "src/scores";
+			scoresPath += "src/scores_" + difficultyCode;
 
 			File scoresFile = new File(scoresPath);
 			inputStream = new FileInputStream(scoresFile);
@@ -219,7 +219,7 @@ public final class FileManager {
 		} catch (FileNotFoundException e) {
 			// loads default if there's no user scores.
 			logger.info("Loading default high scores.");
-			highScores = loadDefaultHighScores();
+			highScores = loadDefaultHighScores(difficultyCode);
 		} finally {
 			if (bufferedReader != null)
 				bufferedReader.close();
@@ -237,7 +237,7 @@ public final class FileManager {
 	 * @throws IOException
 	 *             In case of loading problems.
 	 */
-	public void saveHighScores(final List<Score> highScores) 
+	public void saveHighScores(final List<Score> highScores, int difficultyCode) 
 			throws IOException {
 		OutputStream outputStream = null;
 		BufferedWriter bufferedWriter = null;
@@ -249,7 +249,7 @@ public final class FileManager {
 
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
-			scoresPath += "src/scores";
+			scoresPath += "src/scores_" + difficultyCode;
 			logger.info(scoresPath);
 			File scoresFile = new File(scoresPath);
 
@@ -284,11 +284,14 @@ public final class FileManager {
 	/**
      * Reset user high scores to disk.
      * This contain score savePath
+     * 
+	 * @param diffficultyCode	
+	 * 				This game difficulty level code.
 	 * 
      * @throws IOException
      *             In case of loading problems.
      */
-    public void resetHighScores() 
+    public void resetHighScores(int difficultyCode) 
             throws IOException {
         try {
             String jarPath = FileManager.class.getProtectionDomain()
@@ -296,7 +299,7 @@ public final class FileManager {
             jarPath = URLDecoder.decode(jarPath, "UTF-8");
             String scoresPath = new File(jarPath).getParent();
             scoresPath += File.separator;
-            scoresPath += "src/scores";
+            scoresPath += "src/scores_" + difficultyCode;
             File scoresFile = new File(scoresPath);
             scoresFile.delete();
             if (!scoresFile.exists())

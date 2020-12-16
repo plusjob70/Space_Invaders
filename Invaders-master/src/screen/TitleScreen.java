@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
+import engine.SoundManager;
 
 /**
  * Implements the title screen.
@@ -18,6 +19,8 @@ public class TitleScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
+	/** This Control Sound */
+	private SoundManager soundManager;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -29,14 +32,18 @@ public class TitleScreen extends Screen {
 	 * @param fps
 	 *            Frames per second, frame rate at which the game is run.
 	 */
-	public TitleScreen(final int width, final int height, final int fps) {
+	public TitleScreen(final int width, final int height, final int fps, int difficultyCode) {
 		super(width, height, fps);
 
 		// Defaults to play.
 		this.returnCode = 2;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
-
+		this.difficultyCode = difficultyCode;
+	
+		this.soundManager = Core.getSoundManager();
+		this.soundManager.ChangeBGM("title");
+		this.soundManager.BGMControler(1);
 	}
 
 	/**
@@ -71,6 +78,9 @@ public class TitleScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 			{
+				logger.info("Å¬¸¯");
+				this.soundManager.ChangeSFX("click");
+				this.soundManager.SFXControler(1);
 
 				this.isRunning = false;
 			}
@@ -81,7 +91,7 @@ public class TitleScreen extends Screen {
 	 * Shifts the focus to the next menu item.
 	 */
 	private void nextMenuItem() {
-		if (this.returnCode == 3)
+		if (this.returnCode == 4)
 			this.returnCode = 0;
 		else if (this.returnCode == 0)
 			this.returnCode = 2;
@@ -94,7 +104,7 @@ public class TitleScreen extends Screen {
 	 */
 	private void previousMenuItem() {
 		if (this.returnCode == 0)
-			this.returnCode = 3;
+			this.returnCode = 4;
 		else if (this.returnCode == 2)
 			this.returnCode = 0;
 		else
@@ -107,7 +117,7 @@ public class TitleScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
-		drawManager.drawTitle(this);
+		drawManager.drawTitle(this, this.difficultyCode);
 		drawManager.drawMenu(this, this.returnCode);
 
 		drawManager.completeDrawing(this);

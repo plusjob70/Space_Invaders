@@ -6,6 +6,7 @@ import java.util.Set;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager.SpriteType;
+import engine.SoundManager;
 
 /**
  * Implements a ship, to be controlled by the player.
@@ -27,6 +28,8 @@ public class Ship extends Entity {
 	private Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
 	private Cooldown destructionCooldown;
+	/** This Control Sound */
+	private SoundManager soundManager;
 
 
 	/**
@@ -43,6 +46,7 @@ public class Ship extends Entity {
 		this.spriteType = SpriteType.Ship;
 		this.shootingCooldown = Core.getCooldown(SHOOTING_INTERVAL);
 		this.destructionCooldown = Core.getCooldown(1000);
+		this.soundManager = Core.getSoundManager();
 	}
 
 	/**
@@ -70,6 +74,8 @@ public class Ship extends Entity {
 	 */
 	public final boolean shoot(final Set<Bullet> bullets) {
 		if (this.shootingCooldown.checkFinished()) {
+			this.soundManager.ChangeSFX("shipShoot");
+			this.soundManager.SFXControler(1);
 			
 			this.shootingCooldown.reset();
 			bullets.add(BulletPool.getBullet(positionX + this.width / 2,
@@ -93,6 +99,8 @@ public class Ship extends Entity {
 	 * Switches the ship to its destroyed state.
 	 */
 	public final void destroy() {
+		this.soundManager.ChangeSFX("shipDead");
+		this.soundManager.SFXControler(1);
 		this.destructionCooldown.reset();
 	}
 

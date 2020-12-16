@@ -9,6 +9,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState2;
+import engine.SoundManager;
 import entity.Bullet;
 import entity.BulletPool;
 import entity.EnemyShip;
@@ -26,7 +27,8 @@ import entity.Ship;
 
 
 public class GameScreen_2 extends Screen {
-
+	/** Milliseconds until the screen accepts screen stopdelay */
+	private static final int SCREEN_STOP_INPUT_DELAY = 1000;
 	/** Milliseconds until the screen accepts user input. */
 	private static final int INPUT_DELAY = 6000;
 	/** Bonus score for each life remaining at the end of the level. */
@@ -85,8 +87,12 @@ public class GameScreen_2 extends Screen {
 
 	private boolean ship1End;
 	private boolean ship2End;
-
-
+	/** If the screen is stop */
+	protected boolean isStop = false;
+	
+	
+	/** This Control Sound */
+	private SoundManager soundManager;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -123,6 +129,10 @@ public class GameScreen_2 extends Screen {
 
 		this.ship1End = gameState.getShipEnd1();
 		this.ship2End = gameState.getShipEnd2();
+		
+		this.soundManager = Core.getSoundManager();
+		this.soundManager.ChangeBGM("game");
+		this.soundManager.BGMControler(1);
 
 		if (this.bonusLife) {
 			if(!ship1End && this.lives1 <3) this.lives1++;
@@ -154,6 +164,8 @@ public class GameScreen_2 extends Screen {
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
 		this.inputDelay.reset();
+		this.stopInputDelay = Core.getCooldown(SCREEN_STOP_INPUT_DELAY);
+        this.stopInputDelay.reset();
 	}
 
 	/**
@@ -176,7 +188,23 @@ public class GameScreen_2 extends Screen {
 	 * Updates the elements on screen and checks for events.
 	 */
 	protected final void update() {
+		// Perform Stop Check
+		if(this.inputDelay.checkFinished() && this.stopInputDelay.checkFinished() && inputManager.isKeyDown(KeyEvent.VK_ESCAPE)) {
+            if (!this.isStop) {
+                this.isStop = true;
+                logger.info("This GameScreen is Stop!");
+            }
+            else {
+                this.isStop = false;
+                logger.info("This GameScreen is Play!");
+            }
+            this.stopInputDelay.reset();
+        }
+		if (this.isStop) {
+			draw();
 
+			return;
+		}
 
 		super.update();
 
@@ -306,6 +334,15 @@ public class GameScreen_2 extends Screen {
 							- this.gameStartTime)) / 1000);
 			drawManager.drawCountDown(this, this.level, countdown,
 					this.bonusLife);
+			drawManager.drawHorizontalLine(this, this.height / 2 - this.height / 12);
+			drawManager.drawHorizontalLine(this, this.height / 2 + this.height / 12);
+		}
+
+		// Pause MSG.
+		if (this.isStop)
+		{
+			drawManager.drawHorizontalBox(this, this.height / 2 - this.height / 12, this.height / 2 + this.height / 12);
+			drawManager.drawESC(this);
 			drawManager.drawHorizontalLine(this, this.height / 2 - this.height / 12);
 			drawManager.drawHorizontalLine(this, this.height / 2 + this.height / 12);
 		}

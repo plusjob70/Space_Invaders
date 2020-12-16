@@ -25,6 +25,8 @@ import entity.Ship;
  */
 public class GameScreen extends Screen {
 
+	/** Milliseconds until the screen accepts screen stopdelay */
+    private static final int SCREEN_STOP_INPUT_DELAY = 1000;
 	/** Milliseconds until the screen accepts user input. */
 	private static final int INPUT_DELAY = 6000;
 	/** Bonus score for each life remaining at the end of the level. */
@@ -74,7 +76,8 @@ public class GameScreen extends Screen {
 	private boolean levelFinished;
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
-
+    /** If the screen is stop */
+    protected boolean isStop = false;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -130,6 +133,8 @@ public class GameScreen extends Screen {
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
 		this.inputDelay.reset();
+		this.stopInputDelay = Core.getCooldown(SCREEN_STOP_INPUT_DELAY);
+        this.stopInputDelay.reset();
 	}
 
 	/**
@@ -150,6 +155,19 @@ public class GameScreen extends Screen {
 	 * Updates the elements on screen and checks for events.
 	 */
 	protected final void update() {
+		// Perform Stop Check
+		if(this.inputDelay.checkFinished() && this.stopInputDelay.checkFinished() && inputManager.isKeyDown(KeyEvent.VK_ESCAPE)) {
+            if (!this.isStop) {
+                this.isStop = true;
+                logger.info("This GameScreen is Stop!");
+            }
+            else {
+                this.isStop = false;
+                logger.info("This GameScreen is Play!");
+            }
+            this.stopInputDelay.reset();
+        }
+        if (this.isStop) return;
 
 		super.update();
 
