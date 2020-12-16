@@ -9,6 +9,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState2;
+import engine.SoundManager;
 import entity.Bullet;
 import entity.BulletPool;
 import entity.EnemyShip;
@@ -88,7 +89,12 @@ public class GameScreen_2 extends Screen {
 	private boolean ship2End;
 	/** If the screen is stop */
 	protected boolean isStop = false;
+
 	
+	
+	/** This Control Sound */
+	private SoundManager soundManager;
+
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -125,6 +131,10 @@ public class GameScreen_2 extends Screen {
 
 		this.ship1End = gameState.getShipEnd1();
 		this.ship2End = gameState.getShipEnd2();
+		
+		this.soundManager = Core.getSoundManager();
+		this.soundManager.ChangeBGM("game");
+		this.soundManager.BGMControler(1);
 
 		if (this.bonusLife) {
 			if(!ship1End && this.lives1 <3) this.lives1++;

@@ -6,6 +6,7 @@ import java.util.List;
 
 import engine.Core;
 import engine.Score;
+import engine.SoundManager;
 
 /**
  * Implements the high scores screen, it shows player records.
@@ -17,6 +18,8 @@ public class HighScoreScreen extends Screen {
 
 	/** List of past high scores. */
 	private List<Score> highScores;
+	/** This Control Sound */
+	private SoundManager soundManager;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -33,6 +36,9 @@ public class HighScoreScreen extends Screen {
 
 		this.returnCode = 1;
 		this.difficultyCode = difficultyCode;
+
+		this.soundManager = Core.getSoundManager();
+
 		
 
 		try {
@@ -61,11 +67,15 @@ public class HighScoreScreen extends Screen {
         draw();
         if (this.inputDelay.checkFinished()) {
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
+            	this.soundManager.ChangeSFX("click");
+				this.soundManager.SFXControler(1);
 
                 this.isRunning = false;
             }
             //Reset
             if (inputManager.isKeyDown(KeyEvent.VK_R)) {
+            	this.soundManager.ChangeSFX("click");
+				this.soundManager.SFXControler(1);
 
                 ResetHighScoreScreen();
                 inputDelay.reset();

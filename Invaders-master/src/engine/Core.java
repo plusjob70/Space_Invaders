@@ -336,6 +336,16 @@ public final class Core {
 		return FileManager.getInstance();
 	}
 
+	
+	/**
+	 * Controls access to the sound manager.
+	 * 
+	 * @return Application sound manager.
+	 */
+	public static SoundManager getSoundManager() {
+		return SoundManager.getInstance();
+	}
+
 
 	/**
 	 * Controls creation of new cooldowns.

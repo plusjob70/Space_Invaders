@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import engine.Cooldown;
 import engine.Core;
+import engine.SoundManager;
 
 /**
  * Implements the title screen.
@@ -18,6 +19,8 @@ public class TitleScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
+	/** This Control Sound */
+	private SoundManager soundManager;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -37,6 +40,10 @@ public class TitleScreen extends Screen {
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
 		this.difficultyCode = difficultyCode;
+
+		this.soundManager = Core.getSoundManager();
+		this.soundManager.ChangeBGM("title");
+		this.soundManager.BGMControler(1);
 
 	}
 
@@ -72,6 +79,9 @@ public class TitleScreen extends Screen {
 			}
 			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 			{
+				logger.info("Ŭ��");
+				this.soundManager.ChangeSFX("click");
+				this.soundManager.SFXControler(1);
 
 				this.isRunning = false;
 			}

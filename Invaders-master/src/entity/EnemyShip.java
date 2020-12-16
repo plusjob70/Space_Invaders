@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import engine.Cooldown;
 import engine.Core;
+import engine.SoundManager;
 import engine.DrawManager.SpriteType;
 
 /**
@@ -29,7 +30,9 @@ public class EnemyShip extends Entity {
 	private boolean isDestroyed;
 	/** Values of the ship, in points, when destroyed. */
 	private int pointValue;
-
+	
+	/** This Control Sound */
+	private SoundManager soundManager;
 
 	/**
 	 * Constructor, establishes the ship's properties.
@@ -48,6 +51,7 @@ public class EnemyShip extends Entity {
 		this.spriteType = spriteType;
 		this.animationCooldown = Core.getCooldown(500);
 		this.isDestroyed = false;
+		this.soundManager = Core.getSoundManager();
 
 		switch (this.spriteType) {
 		case EnemyShipA1:
@@ -78,6 +82,7 @@ public class EnemyShip extends Entity {
 		this.spriteType = SpriteType.EnemyShipSpecial;
 		this.isDestroyed = false;
 		this.pointValue = BONUS_TYPE_POINTS;
+		this.soundManager = Core.getSoundManager();
 	}
 
 	/**
@@ -138,6 +143,8 @@ public class EnemyShip extends Entity {
 	 * Destroys the ship, causing an explosion.
 	 */
 	public final void destroy() {
+		this.soundManager.ChangeSFX("enumyDead");
+		this.soundManager.SFXControler(1);
 		this.isDestroyed = true;
 		this.spriteType = SpriteType.Explosion;
 	}

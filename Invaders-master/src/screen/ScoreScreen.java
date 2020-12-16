@@ -24,7 +24,7 @@ public class ScoreScreen extends Screen {
 	/** Milliseconds between changes in user selection. */
 	private static final int SELECTION_TIME = 200;
 	/** Maximum number of high scores. */
-	private static final int MAX_HIGH_SCORE_NUM = 10;//FOR 2PLAYER 기존 7
+	private static final int MAX_HIGH_SCORE_NUM = 10;//FOR 2PLAYER 湲곗〈 7
 	/** Code of first mayus character. */
 	private static final int FIRST_CHAR = 65;
 	/** Code of last mayus character. */
@@ -142,7 +142,7 @@ try {
 }
 
 //FOR 2PLAYER FILE
-//Player2 Socre가 high Socre인지 확인
+//Player2 Socre媛� high Socre�씤吏� �솗�씤
 try {
 	this.highScores = Core.getFileManager().loadHighScores(this.difficultyCode);
 	if (highScores.size() < MAX_HIGH_SCORE_NUM
@@ -190,7 +190,7 @@ try {
 			}
 
 			//FOR 2PLAYER FILE
-			//현재 화살표로만 조정. wasd로 1플레이어, 화살표로 2플레이어로 변경
+			//�쁽�옱 �솕�궡�몴濡쒕쭔 議곗젙. wasd濡� 1�뵆�젅�씠�뼱, �솕�궡�몴濡� 2�뵆�젅�씠�뼱濡� 蹂�寃�
 			//Player1 WASD
 			if (this.isNewRecord && this.selectionCooldown.checkFinished()) {
 				if (inputManager.isKeyDown(KeyEvent.VK_D)) {
@@ -219,9 +219,9 @@ try {
 				}
 				}
 
-				//Player2 화살표
+				//Player2 �솕�궡�몴
 				if (this.isNewRecord2 && this.selectionCooldown.checkFinished()) {
-					//Player2 화살표
+					//Player2 �솕�궡�몴
 					if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)) {
 						this.nameCharSelected2 = this.nameCharSelected2 == 2 ? 0
 								: this.nameCharSelected2 + 1;
@@ -258,11 +258,11 @@ try {
 		highScores.add(new Score(new String(this.name), score));
 		highScores.add(new Score(new String(this.name2), score2));
 
-		//누가 신기록인지. 현재는 Player1자리에서 1등, Player2자리에서 1등인 사람으로정리
+		//�늻媛� �떊湲곕줉�씤吏�. �쁽�옱�뒗 Player1�옄由ъ뿉�꽌 1�벑, Player2�옄由ъ뿉�꽌 1�벑�씤 �궗�엺�쑝濡쒖젙由�
 		if(isNewRecord){
 			List<Score> copyScore = new ArrayList<Score>();
 			for(int i = 0; i*2<highScores.size();i++){
-					copyScore.add(highScores.get(i*2)); //copyScore에 0,2,4,6,8번째 넣기
+					copyScore.add(highScores.get(i*2)); //copyScore�뿉 0,2,4,6,8踰덉㎏ �꽔湲�
 			}
 			Collections.sort(copyScore);
 			for(int i=0; i*2<highScores.size(); i++){
@@ -272,7 +272,7 @@ try {
 		if(isNewRecord2){
 			List<Score> copyScore = new ArrayList<Score>();
 			for(int i = 0; i*2<highScores.size();i++){
-				copyScore.add(highScores.get(i*2+1)); //copyScore에 1,3,5번째 넣기
+				copyScore.add(highScores.get(i*2+1)); //copyScore�뿉 1,3,5踰덉㎏ �꽔湲�
 			}
 			Collections.sort(copyScore);
 			for(int i=0; i*2<highScores.size(); i++){
@@ -281,10 +281,10 @@ try {
 	}
 		
 		if (highScores.size() > MAX_HIGH_SCORE_NUM){
-			 //기존 size /2. Player 둘이니
+			 //湲곗〈 size /2. Player �몮�씠�땲
 			highScores.remove(highScores.size() - 1);
 			highScores.remove(highScores.size() - 2); 
-		}//뒤에 2개 삭제
+		}//�뮘�뿉 2媛� �궘�젣
 
 		try {
 			Core.getFileManager().saveHighScores(highScores, this.difficultyCode);
@@ -296,7 +296,7 @@ try {
 	/**
 	 * Draws the elements associated with the screen.
 	 */
-	private void draw() {
+	private synchronized void draw() {
 		drawManager.initDrawing(this);
 
 		drawManager.drawGameOver(this, this.inputDelay.checkFinished(),
