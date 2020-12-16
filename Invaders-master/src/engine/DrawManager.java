@@ -113,7 +113,7 @@ public final class DrawManager {
 			fontSmall = fileManager.loadFont(11f);
 			fontRegular = fileManager.loadFont(14f);
 			fontBig = fileManager.loadFont(24f);
-			fontBig = fileManager.loadFont(48f);
+			fontHuge = fileManager.loadFont(48f);
 			logger.info("Finished loading the fonts.");
 
 		} catch (IOException e) {

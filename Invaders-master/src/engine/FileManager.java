@@ -225,7 +225,7 @@ public final class FileManager {
 				bufferedReader.close();
 		}
 
-		Collections.sort(highScores);
+//		Collections.sort(highScores);
 		return highScores;
 	}
 
