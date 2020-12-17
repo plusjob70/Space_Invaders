@@ -107,6 +107,7 @@ public class DifficultyScreen extends Screen{
 		else
 			this.difficultyCode--;
 	}
+	
 
 	/**
 	 * Draws the elements associated with the screen.
@@ -120,3 +121,4 @@ public class DifficultyScreen extends Screen{
 		drawManager.completeDrawing(this);
 	}
 }
+/** test */
