@@ -284,7 +284,7 @@ try {
 			 //湲곗〈 size /2. Player �몮�씠�땲
 			highScores.remove(highScores.size() - 1);
 			highScores.remove(highScores.size() - 2); 
-		}//�뮘�뿉 2媛� �궘�젣
+		}//�뮘�뿉 2媛� �궘�젣 add sound
 
 		try {
 			Core.getFileManager().saveHighScores(highScores, this.difficultyCode);
